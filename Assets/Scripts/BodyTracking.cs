@@ -9,22 +9,27 @@ public class BodyTracking : MonoBehaviour
     private Transform[] joints;
     private Vector3[] jointPos;
 
-    private void Awake()
+    private void Start()
     {
         pointBody = GameObject.FindGameObjectWithTag("PointBody").transform;
 
         if (pointBody != null)
         {
-            pointBody.gameObject.SetActive(true);
-            int children = pointBody.childCount;
+            ActivatePointBody();
+        }
+    }
 
-            joints = new Transform[children];
-            jointPos = new Vector3[children];
+    private void ActivatePointBody()
+    {
+        int children = pointBody.childCount;
 
-            for (int i = 0; i < joints.Length; i++)
-            {
-                joints[i] = pointBody.GetChild(i);
-            }
+        joints = new Transform[children];
+        jointPos = new Vector3[children];
+
+        for (int i = 0; i < joints.Length; i++)
+        {
+            joints[i] = pointBody.GetChild(i);
+            joints[i].gameObject.SetActive(true);
         }
     }
 
@@ -32,7 +37,14 @@ public class BodyTracking : MonoBehaviour
     {
         if (pointBody == null)
         {
+            Debug.LogError("NO POINT BODY");
             pointBody = GameObject.FindGameObjectWithTag("PointBody").transform;
+
+            if (pointBody != null)
+            {
+                ActivatePointBody();
+            }
+            
         }
     }
 
