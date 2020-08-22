@@ -9,11 +9,12 @@ using System.Collections.Generic;
 
 public class ConnectToPhoton : MonoBehaviourPunCallbacks
 {
+    private string correctSceneName = "Launcher";
     [SerializeField]
     private Text progressLabel;
     [SerializeField]
     private byte maxPlayersPerRoom = 4;
-    private string defaultRoomName = "defaultExerciseRoom";
+    private string defaultRoomName = null;
     RoomOptions roomOptions;
     private const byte COLOR_CHANGE_EVENT = 0;
     private const byte BODY_TRACKING_EVENT = 1;
@@ -28,6 +29,7 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
     private void Awake()
     {
         roomOptions = new RoomOptions { IsVisible = true, IsOpen = true, MaxPlayers = maxPlayersPerRoom };
+        
         if (Lobby == null)
         {
             Lobby = this;
@@ -41,9 +43,29 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
             }
         }
 
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);        
+    }
+    
+    private bool started = false;
+    private void Update()
+    {
+        if(started)
+        {
+            return;
+        }
 
-        StartNetwork();
+        defaultRoomName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
+        if (defaultRoomName == correctSceneName)
+        {
+            Debug.LogError("Starting Network");
+            StartNetwork();
+            started = true;
+        }
+        else
+        {
+            Debug.LogError(defaultRoomName);
+        }
     }
 
     public override void OnConnectedToMaster()
@@ -145,7 +167,9 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
         }
 
         object[] datas = (object[])obj.CustomData;
-        switch (obj.Code) {
+
+        switch (obj.Code)
+        {
             case COLOR_CHANGE_EVENT:
                 _print(true, "received COLOR_CHANGE_EVENT");
                 break;
