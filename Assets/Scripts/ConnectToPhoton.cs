@@ -28,20 +28,20 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        roomOptions = new RoomOptions { IsVisible = true, IsOpen = true, MaxPlayers = maxPlayersPerRoom };
+        //roomOptions = new RoomOptions { IsVisible = true, IsOpen = true, MaxPlayers = maxPlayersPerRoom };
         
-        if (Lobby == null)
-        {
-            Lobby = this;
-        }
-        else
-        {
-            if (Lobby != this)
-            {
-                Destroy(Lobby.gameObject);
-                Lobby = this;
-            }
-        }
+        //if (Lobby == null)
+        //{
+        //    Lobby = this;
+        //}
+        //else
+        //{
+        //    if (Lobby != this)
+        //    {
+        //        Destroy(Lobby.gameObject);
+        //        Lobby = this;
+        //    }
+        //}
 
         DontDestroyOnLoad(gameObject);        
     }
@@ -54,11 +54,11 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
             return;
         }
 
-        defaultRoomName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        defaultRoomName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;//Launcher
 
         if (defaultRoomName == correctSceneName)
         {
-            Debug.LogError("Starting Network");
+            Debug.LogError("Starting Network: " + defaultRoomName);
             StartNetwork();
             started = true;
         }

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/ManagerScene.unity
     guid: f032560922891c04eb780dcec2889de8
   - enabled: 1
-    path: Assets/Scenes/Kinect Camera Set up.unity
+    path: Assets/Scenes/Content Scenes/Kinect Camera Set up.unity
     guid: 09a84f18445d3f8409743055932b1801
   - enabled: 1
     path: Assets/MRTK/SDK/StandardAssets/Scenes/DefaultLightingScene.unity
@@ -24,6 +24,6 @@ EditorBuildSettings:
     path: Assets/MRTK/SDK/StandardAssets/Scenes/DefaultLightingScene.unity
     guid: 7e54e36c44f826c438c95da79f8de638
   - enabled: 1
-    path: Assets/Scenes/Launcher.unity
+    path: Assets/Scenes/Content Scenes/Launcher.unity
     guid: b80dfecadb5690d4f8fc86b97d48e35f
   m_configObjects: {}
