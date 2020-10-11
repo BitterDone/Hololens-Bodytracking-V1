@@ -44,7 +44,7 @@ public class ConnectToPhoton : MonoBehaviourPunCallbacks
         //}
 
         DontDestroyOnLoad(gameObject);        
-    }
+    } 
     
     private bool started = false;
     private void Update()
